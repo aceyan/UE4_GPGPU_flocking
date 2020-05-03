@@ -3,4 +3,18 @@
 #include "Flocking.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Flocking, "Flocking" );
+#include "Misc/Paths.h"
+#include "ShaderCore.h"
+
+
+void FFlocking::StartupModule() {
+	FString ShaderDirectory = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
+	AddShaderSourceDirectoryMapping("/Project", ShaderDirectory);
+}
+
+void FFlocking::ShutdownModule() {
+	ResetAllShaderSourceDirectoryMappings();
+}
+IMPLEMENT_PRIMARY_GAME_MODULE(FFlocking, Flocking, "Flocking");
+
+
