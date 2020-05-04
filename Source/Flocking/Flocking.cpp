@@ -7,14 +7,18 @@
 #include "ShaderCore.h"
 
 
-void FFlocking::StartupModule() {
+void FFlocking::StartupModule() 
+{
+	//mappinng shaders floder
 	FString ShaderDirectory = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
 	AddShaderSourceDirectoryMapping("/Project", ShaderDirectory);
 }
 
-void FFlocking::ShutdownModule() {
+void FFlocking::ShutdownModule()
+{
 	ResetAllShaderSourceDirectoryMappings();
 }
+
 IMPLEMENT_PRIMARY_GAME_MODULE(FFlocking, Flocking, "Flocking");
 
 
