@@ -24,7 +24,7 @@ void AInstancingRootActor::InitInstances(int instatnceNum)
 		for (int i = 0; i < instatnceNum; i++)
 		{
 			FTransform t = FTransform();
-			t.SetLocation(FVector(FMath::RandRange(-100, 100) * i, FMath::RandRange(-1024, 1024), FMath::RandRange(-1024, 1024)));
+			//t.SetLocation(FVector(FMath::RandRange(-100, 100) * i, FMath::RandRange(-1024, 1024), FMath::RandRange(-1024, 1024)));
 			InstancedComponent->AddInstance(t);
 			InstancedComponent->SetCustomDataValue(i, 0, i);
 			UE_LOG(LogTemp, Warning, TEXT("AddInstance %d"), i);
@@ -40,7 +40,7 @@ void AInstancingRootActor::BeginPlay()
 	if (DrawMat != nullptr)
 	{
 		DrawMatInstance = InstancedComponent->CreateDynamicMaterialInstance(0, DrawMat);
-		InitInstances(1000);
+		InitInstances(100);
 		UE_LOG(LogTemp, Warning, TEXT("InitInstances!"));
 	}
 }
