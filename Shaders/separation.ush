@@ -1,7 +1,7 @@
 	
 	float maxForce = 0.01;
 	float maxSpeed = 5;
-    float d = 300;
+    float d = 200;
     float3 totalVelocity = float3(0,0,0);
     float3 acc = float3(0,0,0);
     float num = 0.0;

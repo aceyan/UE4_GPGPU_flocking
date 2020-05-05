@@ -3,14 +3,20 @@
 
 #include "InstancingRootActor.h"
 #include "Components/InstancedStaticMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 AInstancingRootActor::AInstancingRootActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	//this staticmeshComponent act as the bound of the UInstancedStaticMeshComponent ot avoid blink
+	rootStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("rootStaticMesh"));
+	RootComponent = rootStaticMesh;
+
 	InstancedComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("UInstancedStaticMeshComponent"));
-	RootComponent = InstancedComponent;
+	InstancedComponent->SetupAttachment(rootStaticMesh);
 
 	//set the number of custom data needed
 	InstancedComponent->NumCustomDataFloats = 1;

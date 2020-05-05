@@ -28,6 +28,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flocking")
 		class UInstancedStaticMeshComponent* InstancedComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flocking")
+		class UStaticMeshComponent* rootStaticMesh;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Flocking")
 		class UMaterial* DrawMat;
 
