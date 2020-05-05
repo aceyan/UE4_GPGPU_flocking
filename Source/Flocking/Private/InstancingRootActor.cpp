@@ -40,7 +40,7 @@ void AInstancingRootActor::BeginPlay()
 	if (DrawMat != nullptr)
 	{
 		DrawMatInstance = InstancedComponent->CreateDynamicMaterialInstance(0, DrawMat);
-		InitInstances(40);
+		InitInstances(400);
 		UE_LOG(LogTemp, Warning, TEXT("InitInstances!"));
 	}
 }

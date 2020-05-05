@@ -1,14 +1,14 @@
 	
 	float maxForce = 0.01;
 	float maxSpeed = 5;
-    float d = 1000;
+    float d = 300;
     float3 totalVelocity = float3(0,0,0);
     float3 acc = float3(0,0,0);
     float num = 0.0;
 
-    for (int y = 0.0; y < scale.y; y++)
+    for (int y = 0; y < scale.y; y++)
     {
-      for (int x = 0.0; x < scale.x; x++) 
+      for (int x = 0; x < scale.x; x++) 
       { 
         float2 neighborUV = float2(x, y)/scale.xy;
         float3 neighborPos =  Texture2DSample(Tex, TexSampler, neighborUV);
@@ -36,4 +36,3 @@
       }
     }
     return acc;
-   //return float3(0,0,0);
