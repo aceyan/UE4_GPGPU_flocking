@@ -25,6 +25,22 @@
       }
     }
 
+    if(Mode == 2.0)//predator mode, run away from the player
+    {
+       float distance = length(currentPos - playerPos);
+        if(distance <= 1000)
+        {
+           float3 diff = currentPos - playerPos;
+            diff /= distance;
+            totalVelocity += diff * 100000.0;
+            num++;
+            maxForce = 0.1;
+        }
+
+       // return float3(0,0,0);
+    }
+
+
     if(num > 0.0)
     {
       totalVelocity /= num;
