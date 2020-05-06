@@ -36,4 +36,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void InitInstances(int instatnceNum);
+
+	UFUNCTION(BlueprintCallable)
+		int GetInstanceCount();
 };

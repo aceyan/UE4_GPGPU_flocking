@@ -25,6 +25,14 @@ AInstancingRootActor::AInstancingRootActor()
 
 void AInstancingRootActor::InitInstances(int instatnceNum)
 {
+	if (instatnceNum <= 0)
+	{
+		instatnceNum = 1;
+	}
+	else if (instatnceNum > 10000)
+	{
+		instatnceNum = 10000;
+	}
 	InstancedComponent->ClearInstances();
 		//create instances
 		for (int i = 0; i < instatnceNum; i++)
@@ -38,6 +46,15 @@ void AInstancingRootActor::InitInstances(int instatnceNum)
 }
 
 
+int AInstancingRootActor::GetInstanceCount()
+{
+	if (InstancedComponent != nullptr)
+	{
+		return InstancedComponent->GetInstanceCount();
+	}
+	return 0;
+}
+
 // Called when the game starts or when spawned
 void AInstancingRootActor::BeginPlay()
 {
@@ -46,7 +63,7 @@ void AInstancingRootActor::BeginPlay()
 	if (DrawMat != nullptr)
 	{
 		DrawMatInstance = InstancedComponent->CreateDynamicMaterialInstance(0, DrawMat);
-		InitInstances(400);
+		InitInstances(10000);
 		UE_LOG(LogTemp, Warning, TEXT("InitInstances!"));
 	}
 }
