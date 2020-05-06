@@ -12,7 +12,7 @@
               float2 neighborUV = float2(x, y)/scale.xy;
               float3 neighborPos =  Texture2DSample(Tex, TexSampler, neighborUV);
               float distance = length(currentPos - neighborPos);
-              if(distance!=0 && distance <= d)
+              if(distance!=0 && distance < d)
               {
                 totalVelocity += neighborPos;
                 num++;
