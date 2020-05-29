@@ -25,7 +25,7 @@ AInstancingRootActor::AInstancingRootActor()
 
 void AInstancingRootActor::InitInstances(int instatnceNum)
 {
-	if (instatnceNum <= 0)
+	if (instatnceNum <= 1)
 	{
 		instatnceNum = 1;
 	}
