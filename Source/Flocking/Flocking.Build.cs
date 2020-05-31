@@ -8,7 +8,7 @@ public class Flocking : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "RenderCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "RenderCore" , "FlockingComputeShader" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

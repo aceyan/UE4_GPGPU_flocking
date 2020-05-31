@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "InstancingRootActor.h"
@@ -29,9 +29,9 @@ void AInstancingRootActor::InitInstances(int instatnceNum)
 	{
 		instatnceNum = 1;
 	}
-	else if (instatnceNum > 10000)
+	else if (instatnceNum > 16384)
 	{
-		instatnceNum = 10000;
+		instatnceNum = 16384;
 	}
 	InstancedComponent->ClearInstances();
 		//create instances
@@ -63,7 +63,7 @@ void AInstancingRootActor::BeginPlay()
 	if (DrawMat != nullptr)
 	{
 		DrawMatInstance = InstancedComponent->CreateDynamicMaterialInstance(0, DrawMat);
-		InitInstances(10000);
+		InitInstances(16384);
 		UE_LOG(LogTemp, Warning, TEXT("InitInstances!"));
 	}
 }

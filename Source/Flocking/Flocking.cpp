@@ -10,13 +10,13 @@
 void FFlocking::StartupModule() 
 {
 	//mappinng shaders floder
-	FString ShaderDirectory = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
-	AddShaderSourceDirectoryMapping("/Project", ShaderDirectory);
+	//FString ShaderDirectory = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
+	//AddShaderSourceDirectoryMapping("/Project", ShaderDirectory);
 }
 
 void FFlocking::ShutdownModule()
 {
-	ResetAllShaderSourceDirectoryMappings();
+	//ResetAllShaderSourceDirectoryMappings();
 }
 
 IMPLEMENT_PRIMARY_GAME_MODULE(FFlocking, Flocking, "Flocking");
