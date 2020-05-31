@@ -1,1 +1,0 @@
-return float3(sin(Time) * 10  * InstanceID ,0 , 0);
