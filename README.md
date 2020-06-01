@@ -1,4 +1,4 @@
-# UE4 GPGPU Flocking/Boids2
+# UE4 GPGPU Flocking/Boids ComputeShader branch
 
 This DEMO used GPGPU to implement boids algorithm in UE4 and achieved the flocking movement of 10,000 objects. It runs in 60FPS on my laptop with GTX1660Ti, windows 10-64bit. The UE4 version being used is UE4 4.25 preview 7. (Update: 
 UE4 4.25.0 is relased now. This DEMO has been tested in UE4 4.25.0.)   
@@ -14,9 +14,7 @@ I also provide interface allowing players to change the parameter of the boids a
 2. Press **'3' or '4'** to adjust align force scale
 3. Press **'5' or '6'** to adjust cohesion force scale
 4. Press **'7' or '8'** to adjust separation force scale
-5. Press **'P'** to enter Predator Mode (the boids will avoid player)
-6. Press **'C'** to enter Chasing Mode (the boids will chase player)
-7. Press **'N'** to go back to Normal Mode (there are no interaction between boids and player, player acts as a observers)
+
 
 ## Implementation description
 ### 1.	Rendering boids
