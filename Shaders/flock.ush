@@ -1,0 +1,113 @@
+float maxForce = 0.01;
+float maxSpeed = 5;
+float alignDist = 300;
+float3 alignTotalVelocity = float3(0, 0, 0);
+float3 alignAcc = float3(0, 0, 0);
+float alignNum = 0.0;
+//
+float cohesionDist = 600;
+float3 cohesionTotalVelocity = float3(0, 0, 0);
+float3 cohesionAcc = float3(0, 0, 0);
+float cohesionNum = 0.0;
+//
+float separationDist = 200;
+float3 separationTotalVelocity = float3(0,0,0);
+float3 separationAcc = float3(0,0,0);
+float separationNum = 0.0;
+
+for (int y = 0; y < scale.y; y++)
+	    {
+	      for (int x = 0;x < scale.x; x++) 
+	      { 
+	        float2 neighborUV = float2(x, y) / scale.xy;
+	        float3 neighborPos = Texture2DSample(PTex, PTexSampler, neighborUV);
+	        float distance = length(currentPos - neighborPos);
+	        if(distance!=0)
+	        {
+	        	if(distance < cohesionDist)
+	        	{
+	        		if(Mode != 1.0)//chasing mode, follow the player
+	        		{
+		        		cohesionTotalVelocity += neighborPos;
+	                  	cohesionNum++;
+                  	}
+	        		if(distance < alignDist)
+	        		{
+ 						alignTotalVelocity += Texture2DSample(VTex, VTexSampler, neighborUV).rgb; 
+	          			alignNum++;
+	          			if(distance < separationDist)
+		        		{
+		        			float3 diff = currentPos - neighborPos;
+				            diff = normalize(diff);
+				          	diff /= distance;
+				          	separationTotalVelocity += diff;
+				          	separationNum++;
+		        		}
+	        		}
+
+	        	}
+	         
+	        }
+	      }
+	    }
+    
+    	
+
+
+
+    if(alignNum > 0.0)
+    {
+      alignTotalVelocity /= alignNum;
+      alignTotalVelocity = normalize(alignTotalVelocity) * maxSpeed;
+      alignAcc = alignTotalVelocity - currentVel;
+      if(length(alignAcc) > maxForce)
+      {
+        alignAcc = normalize(alignAcc) * maxForce;
+      }
+    }
+
+    
+    if(Mode == 1.0)//chasing mode, follow the player
+    {
+      cohesionTotalVelocity += playerPos;
+      cohesionNum++; 
+    }
+
+    if(cohesionNum > 0.0)
+    {
+      cohesionTotalVelocity /= cohesionNum;
+      cohesionTotalVelocity = cohesionTotalVelocity - currentPos;
+      cohesionTotalVelocity = normalize(cohesionTotalVelocity) * maxSpeed;
+      cohesionAcc = cohesionTotalVelocity - currentVel;
+      if(length(cohesionAcc) > maxForce)
+      {
+        cohesionAcc = normalize(cohesionAcc) * maxForce;
+      }
+    }
+
+    //separation
+    if(Mode == 2.0)//predator mode, run away from the player
+    {
+       float distance = length(currentPos - playerPos);
+        if(distance <= 1000)
+        {
+           float3 diff = currentPos - playerPos;
+            diff /= distance;
+            separationTotalVelocity += diff * 100000.0;
+            separationNum++;
+            maxForce = 0.1;
+        }
+    }
+
+    if(separationNum > 0.0)
+    {
+      separationTotalVelocity /= separationNum;
+      separationTotalVelocity = normalize(separationTotalVelocity) * maxSpeed;
+      separationAcc = separationTotalVelocity - currentVel;
+      if(length(separationAcc) > maxForce)
+      {
+        separationAcc = normalize(separationAcc) * maxForce;
+      }
+    }
+
+return separationAcc * separationForceScaler + cohesionAcc * cohesionForceScaler + alignAcc * alignForceScaler;
