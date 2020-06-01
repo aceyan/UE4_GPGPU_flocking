@@ -1,4 +1,4 @@
-# UE4 GPGPU Flocking/Boids Master branch
+# UE4 GPGPU Flocking/Boids master branch
 
 This DEMO used GPGPU to implement boids algorithm in UE4 and achieved the flocking movement of 10,000+ objects. It runs in 60FPS on my laptop with GTX1660Ti, windows 10-64bit. The UE4 version being used is UE4 4.25 preview 7. (Update: 
 UE4 4.25.0 is relased now. This DEMO has been tested in UE4 4.25.0.)   
