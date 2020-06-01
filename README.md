@@ -2,7 +2,7 @@
 
 This DEMO used GPGPU (compute shader) to implement boids algorithm in UE4 and achieved the flocking movement of 10,000+ objects. It runs in 60FPS on my laptop with GTX1660Ti, windows 10-64bit. The UE4 version being used is UE4 4.25.
 
-URL of DEMO video: https://www.youtube.com/watch?v=MqYdyMEQzW4&feature=youtu.be   
+URL of DEMO video: https://www.youtube.com/watch?v=_XHFzv3XH2o&feature=youtu.be
 
 ![DemoScreenShot](Image/DemoScreenShot.png)
 
