@@ -23,6 +23,16 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
 		float Range;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
+		float SeparationForceScaler;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
+		float CohesionForceScaler;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
+		float AlignForceScaler;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

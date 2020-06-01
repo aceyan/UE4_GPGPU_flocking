@@ -6,6 +6,9 @@ RWTexture2D<float4> PositionOutputTexture; //pos
 Texture2D<float4> PositionInput;//pos
 float2 TextureSize;
 float Range;
+float AlignScaler;
+float CohesionScaler;
+float SeparationScaler;
 
 
 float4 rangeChecker(float4 currentPos, float4 currentVel)
@@ -150,7 +153,7 @@ float3 getAcceleration(uint3 ThreadId, float3 currentPos, float3 currentVel)
             separationAcc = normalize(separationAcc) * maxForce;
         }
     }
-    return alignAcc + cohesionAcc + separationAcc;
+    return alignAcc * AlignScaler + cohesionAcc * CohesionScaler + separationAcc * SeparationScaler;
 
 }
 

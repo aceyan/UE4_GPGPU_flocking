@@ -25,6 +25,9 @@ public:
 		SHADER_PARAMETER_TEXTURE(Texture2D<float4>, PositionInput)
 		SHADER_PARAMETER(FVector2D, TextureSize) // Metal doesn't support GetDimensions(), so we send in this data via our parameters.
 		SHADER_PARAMETER(float, Range)
+		SHADER_PARAMETER(float, AlignScaler)
+		SHADER_PARAMETER(float, CohesionScaler)
+		SHADER_PARAMETER(float, SeparationScaler)
 	END_SHADER_PARAMETER_STRUCT()
 
 public:
@@ -61,6 +64,9 @@ void FComputeShaderExample::RunComputeShader_RenderThread(FRHICommandListImmedia
 	PassParameters.PositionInput = PositionInputRT;
 	PassParameters.TextureSize = FVector2D(DrawParameters.GetRenderTargetSize().X, DrawParameters.GetRenderTargetSize().Y);
 	PassParameters.Range = DrawParameters.Range;
+	PassParameters.AlignScaler = DrawParameters.AlignScaler;
+	PassParameters.CohesionScaler = DrawParameters.CohesionScaler;
+	PassParameters.SeparationScaler = DrawParameters.SeparationScaler;
 
 	TShaderMapRef<FComputeShaderExampleCS> ComputeShader(GetGlobalShaderMap(GMaxRHIFeatureLevel));
 	FComputeShaderUtils::Dispatch(RHICmdList, ComputeShader, PassParameters, 
