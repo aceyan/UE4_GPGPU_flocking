@@ -1,6 +1,6 @@
-# UE4 GPGPU Flocking/Boids
+# UE4 GPGPU Flocking/Boids Master branch
 
-This DEMO used GPGPU to implement boids algorithm in UE4 and achieved the flocking movement of 10,000 objects. It runs in 60FPS on my laptop with GTX1660Ti, windows 10-64bit. The UE4 version being used is UE4 4.25 preview 7. (Update: 
+This DEMO used GPGPU to implement boids algorithm in UE4 and achieved the flocking movement of 10,000+ objects. It runs in 60FPS on my laptop with GTX1660Ti, windows 10-64bit. The UE4 version being used is UE4 4.25 preview 7. (Update: 
 UE4 4.25.0 is relased now. This DEMO has been tested in UE4 4.25.0.)   
 
 URL of DEMO video: https://www.youtube.com/watch?v=MqYdyMEQzW4&feature=youtu.be   
@@ -17,6 +17,7 @@ I also provide interface allowing players to change the parameter of the boids a
 5. Press **'P'** to enter Predator Mode (the boids will avoid player)
 6. Press **'C'** to enter Chasing Mode (the boids will chase player)
 7. Press **'N'** to go back to Normal Mode (there are no interaction between boids and player, player acts as a observers)
+
 
 ## Implementation description
 ### 1.	Rendering boids
@@ -35,11 +36,13 @@ C++ is mainly for initializing component, clearing and changing the amount of in
 
 ## Future works
 I originally intended to use compute shader for computation, but I cannot make have it imported as a plugin. There is little information about it available online, and even the [official tutorials](https://docs.unrealengine.com/en-US/Programming/Rendering/ShaderInPlugin/QuickStart/index.html) are not up to date.(The ShaderCore module is no longer available after UE4 4.21, but the tutorial still tries to import this module in the build.cs file.). I will conutinue to explore how to make it correct.
-GPU particle and Niagara sytem are aslo schemes worth exploring to implement grouping behavior.
+GPU particle and Niagara sytem are aslo schemes worth exploring to implement grouping behavior.    
+## Update   
+Thanks for the wonderful tutorial from [@Temaran](https://github.com/Temaran), I implemented another version of GPGPU Flocking/Boids using compute shader in UE4. Source code of the compute shader version is in the [ComputeShader branch of this repo](https://github.com/aceyan/UE4_GPGPU_flocking/tree/ComputeShader).
 
 ## References
 [THE NATURE OF CODE Chapter 6. Autonomous Agents](https://natureofcode.com/book/chapter-6-autonomous-agents/)   
 [Manipulate 125,000 Cubes with GPGPU - Unreal Engine 4](https://www.youtube.com/watch?v=LQBgJBC0jhE)   
 [[UE4]ブループリントだけでGPGPUをしよう ~ その1 インスタンスIDを割り振る ~](https://qiita.com/selflash/items/c937308299d93340f7c7)   
-Many thanks to [@selflash](https://github.com/selflash) for helping me solve the problem of floating point texture accuracy!
-
+Many thanks to [@selflash](https://github.com/selflash) for helping me solve the problem of floating point texture accuracy!   
+[Pixel and Compute Shaders in UE4](https://forums.unrealengine.com/development-discussion/c-gameplay-programming/29352-tutorial-pixel-and-compute-shaders-in-ue4)
