@@ -24,11 +24,15 @@ Thanks for the wonderful tutorial from [@Temaran](https://github.com/Temaran), I
 Compute shader is imported as a plugin. Velocity and position information are saved in renderTarget2Ds which is similar to master branch, but this time we use compute shader to do calculation for it and use customized vertex and fragment shader to upate the renderTarget2Ds.
 
 ## Future works
-
+Using spatial hashing algorithm to do optimization and achieve more boids.
 
 ## References
 [THE NATURE OF CODE Chapter 6. Autonomous Agents](https://natureofcode.com/book/chapter-6-autonomous-agents/)   
 [Manipulate 125,000 Cubes with GPGPU - Unreal Engine 4](https://www.youtube.com/watch?v=LQBgJBC0jhE)   
 [[UE4]ブループリントだけでGPGPUをしよう ~ その1 インスタンスIDを割り振る ~](https://qiita.com/selflash/items/c937308299d93340f7c7)   
 Many thanks to [@selflash](https://github.com/selflash) for helping me solve the problem of floating point texture accuracy!   
-[Pixel and Compute Shaders in UE4](https://forums.unrealengine.com/development-discussion/c-gameplay-programming/29352-tutorial-pixel-and-compute-shaders-in-ue4)
+[Pixel and Compute Shaders in UE4](https://forums.unrealengine.com/development-discussion/c-gameplay-programming/29352-tutorial-pixel-and-compute-shaders-in-ue4)   
+[500,000 boids simulated with a compute shader](https://www.reddit.com/r/Unity3D/comments/c874d9/500000_boids_simulated_with_a_compute_shader/)   
+[Scalable GPU Fluid Simulation](https://wickedengine.net/2018/05/21/scalabe-gpu-fluid-simulation/)    
+[FAST FIXED-RADIUS NEAREST NEIGHBORS:
+INTERACTIVE MILLION-PARTICLE FLUIDS](http://on-demand.gputechconf.com/gtc/2014/presentations/S4117-fast-fixed-radius-nearest-neighbor-gpu.pdf)
