@@ -35,6 +35,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
 		class UTextureRenderTarget* myTexture;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
+		TArray<AActor*> actorList;
 		
 protected:
 	// Called when the game starts or when spawned

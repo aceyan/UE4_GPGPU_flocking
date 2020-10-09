@@ -60,12 +60,27 @@ void ACSTestActor::Tick(float DeltaTime)
 
 		if (textureResource->ReadFloat16Pixels(ColorBuffer16))
 		{
-			//FFloat16 r = ColorBuffer16[0].R;
-			float x = ColorBuffer16[0].R.GetFloat();
-			float y = ColorBuffer16[0].G.GetFloat();
-			float z = ColorBuffer16[0].B.GetFloat();
-			//UE_LOG(LogTemp, Warning, TEXT("f is  %f"), f);
-			SetActorLocation(FVector(x, y, z));//??? 
+		
+
+			for (int i = 0; i < actorList.Num() && i < ColorBuffer16.Num(); i++)
+			{
+				float x = ColorBuffer16[i].R.GetFloat();
+				float y = ColorBuffer16[i].G.GetFloat();
+				float z = ColorBuffer16[i].B.GetFloat();
+				//UE_LOG(LogTemp, Warning, TEXT("f is  %f"), f);
+				//SetActorLocation(FVector(x, y, z));//??? 
+
+
+				AActor* p = actorList[i];
+
+				//bottle neck, it is slow!
+				p->SetActorLocation(FVector(x, y, z));
+
+			}
+			
+
+
+
 		}
 	}
 
