@@ -19,6 +19,9 @@ void ACSTestActor::BeginPlay()
 {
 	Super::BeginPlay();
 	FFlockingComputeShader::Get().BeginRendering();
+
+	if (myTexture != NULL) textureResource = (FTextureRenderTarget2DResource*)myTexture->Resource;
+	
 }
 
 void ACSTestActor::BeginDestroy()
@@ -39,5 +42,32 @@ void ACSTestActor::Tick(float DeltaTime)
 		DrawParameters.SeparationScaler = SeparationForceScaler;
 	}
 	FFlockingComputeShader::Get().UpdateParameters(DrawParameters);
+
+
+	//TArray<FColor> ColorBuffer;
+	
+	if (myTexture != NULL)
+	{
+
+		//FTextureRenderTarget2DResource* textureResource = (FTextureRenderTarget2DResource*)myTexture->Resource;
+
+		//if (textureResource->ReadPixels(ColorBuffer))
+		//{
+
+		//	//UE_LOG(LogTemp, Warning, TEXT("%d"), ColorBuffer[0].R);
+
+		//}
+
+		if (textureResource->ReadFloat16Pixels(ColorBuffer16))
+		{
+			//FFloat16 r = ColorBuffer16[0].R;
+			float x = ColorBuffer16[0].R.GetFloat();
+			float y = ColorBuffer16[0].G.GetFloat();
+			float z = ColorBuffer16[0].B.GetFloat();
+			//UE_LOG(LogTemp, Warning, TEXT("f is  %f"), f);
+			SetActorLocation(FVector(x, y, z));//??? 
+		}
+	}
+
 }
 

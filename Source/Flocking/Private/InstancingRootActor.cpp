@@ -29,9 +29,9 @@ void AInstancingRootActor::InitInstances(int instatnceNum)
 	{
 		instatnceNum = 1;
 	}
-	else if (instatnceNum > 16384)
+	else if (instatnceNum > 25600)
 	{
-		instatnceNum = 16384;
+		instatnceNum = 25600;
 	}
 	InstancedComponent->ClearInstances();
 		//create instances
@@ -63,7 +63,7 @@ void AInstancingRootActor::BeginPlay()
 	if (DrawMat != nullptr)
 	{
 		DrawMatInstance = InstancedComponent->CreateDynamicMaterialInstance(0, DrawMat);
-		InitInstances(16384);
+		InitInstances(25600);
 		UE_LOG(LogTemp, Warning, TEXT("InitInstances!"));
 	}
 }

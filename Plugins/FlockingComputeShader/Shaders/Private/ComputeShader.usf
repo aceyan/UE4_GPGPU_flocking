@@ -15,14 +15,14 @@ float4 rangeChecker(float4 currentPos, float4 currentVel)
 {
     float4 finalVelocity = currentVel;
     Range = Range / 2;
-    if (currentPos.x > Range)
+    if (currentPos.x >= Range)
     {
         if (finalVelocity.x > 0)
         {
             finalVelocity.x *= -1;
         }
     }
-    else if (currentPos.x < -Range)
+    else if (currentPos.x <= -Range)
     {
         if (finalVelocity.x < 0)
         {
@@ -30,14 +30,14 @@ float4 rangeChecker(float4 currentPos, float4 currentVel)
         }
     }
 
-    if (currentPos.y > Range)
+    if (currentPos.y >= Range)
     {
         if (finalVelocity.y > 0)
         {
             finalVelocity.y *= -1;
         }
     }
-    else if (currentPos.y < -Range)
+    else if (currentPos.y <= -Range)
     {
         if (finalVelocity.y < 0)
         {
@@ -45,14 +45,14 @@ float4 rangeChecker(float4 currentPos, float4 currentVel)
         }
     }
 
-    if (currentPos.z > Range)
+    if (currentPos.z >= Range)
     {
         if (finalVelocity.z > 0)
         {
             finalVelocity.z *= -1;
         }
     }
-    else if (currentPos.z < -Range)
+    else if (currentPos.z <= -Range)
     {
         if (finalVelocity.z < 0)
         {

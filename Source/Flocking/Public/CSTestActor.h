@@ -33,6 +33,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
 		float AlignForceScaler;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ComputeShaderFlocking)
+		class UTextureRenderTarget* myTexture;
+		
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -40,5 +43,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+private:
+	TArray<FFloat16Color> ColorBuffer16;
+	class FTextureRenderTarget2DResource* textureResource;
 
 };
