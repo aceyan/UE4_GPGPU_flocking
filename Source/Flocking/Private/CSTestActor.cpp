@@ -3,6 +3,7 @@
 
 #include "CSTestActor.h"
 #include "FlockingComputeShader.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 ACSTestActor::ACSTestActor()
@@ -20,8 +21,9 @@ void ACSTestActor::BeginPlay()
 	Super::BeginPlay();
 	FFlockingComputeShader::Get().BeginRendering();
 
-	if (myTexture != NULL) textureResource = (FTextureRenderTarget2DResource*)myTexture->Resource;
-	
+	//if (myTexture != NULL) textureResource = (FTextureRenderTarget2DResource*)myTexture->Resource;
+	if (PositionRenderTarget != NULL) posTextureResource = (FTextureRenderTarget2DResource*)PositionRenderTarget->Resource;
+	if (VelocityRenderTarget != NULL) velTextureResource = (FTextureRenderTarget2DResource*)VelocityRenderTarget->Resource;
 }
 
 void ACSTestActor::BeginDestroy()
@@ -46,7 +48,7 @@ void ACSTestActor::Tick(float DeltaTime)
 
 	//TArray<FColor> ColorBuffer;
 	
-	if (myTexture != NULL)
+	if (posTextureResource != NULL)
 	{
 
 		//FTextureRenderTarget2DResource* textureResource = (FTextureRenderTarget2DResource*)myTexture->Resource;
@@ -57,16 +59,16 @@ void ACSTestActor::Tick(float DeltaTime)
 		//	//UE_LOG(LogTemp, Warning, TEXT("%d"), ColorBuffer[0].R);
 
 		//}
-
-		if (textureResource->ReadFloat16Pixels(ColorBuffer16))
+		
+		if (posTextureResource->ReadFloat16Pixels(posColorBuffer16) && velTextureResource->ReadFloat16Pixels(velColorBuffer16))
 		{
 		
 
-			for (int i = 0; i < actorList.Num() && i < ColorBuffer16.Num(); i++)
+			for (int i = 0; i < actorList.Num() && i < posColorBuffer16.Num(); i++)
 			{
-				float x = ColorBuffer16[i].R.GetFloat();
-				float y = ColorBuffer16[i].G.GetFloat();
-				float z = ColorBuffer16[i].B.GetFloat();
+				float x = posColorBuffer16[i].R.GetFloat();
+				float y = posColorBuffer16[i].G.GetFloat();
+				float z = posColorBuffer16[i].B.GetFloat();
 				//UE_LOG(LogTemp, Warning, TEXT("f is  %f"), f);
 				//SetActorLocation(FVector(x, y, z));//??? 
 
@@ -76,11 +78,18 @@ void ACSTestActor::Tick(float DeltaTime)
 				//bottle neck, it is slow!
 				p->SetActorLocation(FVector(x, y, z));
 
+
+				float vx = velColorBuffer16[i].R.GetFloat();
+				float vy = velColorBuffer16[i].G.GetFloat();
+				float vz = velColorBuffer16[i].B.GetFloat();
+
+				FVector velocity = FVector(vx, vy, vz);
+
+
+				FRotator PlayerRot = UKismetMathLibrary::FindLookAtRotation(p->GetActorLocation(), p->GetActorLocation() + velocity);
+				p->SetActorRotation(PlayerRot);
 			}
 			
-
-
-
 		}
 	}
 
