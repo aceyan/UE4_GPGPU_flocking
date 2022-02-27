@@ -53,7 +53,7 @@ IMPLEMENT_GLOBAL_SHADER(FComputeShaderExampleCS, "/FlockingComputeShaders/Privat
 void FComputeShaderExample::RunComputeShader_RenderThread(FRHICommandListImmediate& RHICmdList, const FShaderUsageExampleParameters& DrawParameters, FUnorderedAccessViewRHIRef VelocityOutpuUAV, FTextureRHIRef VelocityInputRT , FUnorderedAccessViewRHIRef PositionOutputUAV, FTextureRHIRef PositionInputRT)
 {
 
-	UnbindRenderTargets(RHICmdList);
+	//UnbindRenderTargets(RHICmdList);
 	RHICmdList.TransitionResource(EResourceTransitionAccess::ERWBarrier, EResourceTransitionPipeline::EGfxToCompute, VelocityOutpuUAV);
 	RHICmdList.TransitionResource(EResourceTransitionAccess::ERWBarrier, EResourceTransitionPipeline::EGfxToCompute, PositionOutputUAV);
 

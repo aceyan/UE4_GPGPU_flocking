@@ -106,7 +106,7 @@ void FFlockingComputeShader::Draw_RenderThread(const FShaderUsageExampleParamete
 
 	if (!VelocityOutput.IsValid())
 	{
-		FPooledRenderTargetDesc ComputeShaderOutputDesc(FPooledRenderTargetDesc::Create2DDesc(DrawParameters.GetRenderTargetSize(), PF_A32B32G32R32F, FClearValueBinding::None, TexCreate_None, TexCreate_ShaderResource | TexCreate_UAV, false));
+		FPooledRenderTargetDesc ComputeShaderOutputDesc(FPooledRenderTargetDesc::Create2DDesc(DrawParameters.GetRenderTargetSize(), PF_FloatRGBA, FClearValueBinding::None, TexCreate_None, TexCreate_ShaderResource | TexCreate_UAV, false));
 
 		ComputeShaderOutputDesc.DebugName = TEXT("ShaderPlugin_ComputeShaderOutput");
 		GRenderTargetPool.FindFreeElement(RHICmdList, ComputeShaderOutputDesc, VelocityOutput, TEXT("ShaderPlugin_ComputeShaderOutput"));
@@ -114,12 +114,14 @@ void FFlockingComputeShader::Draw_RenderThread(const FShaderUsageExampleParamete
 
 	if (!PositionOutput.IsValid())
 	{
-		FPooledRenderTargetDesc ComputeShaderOutputDesc(FPooledRenderTargetDesc::Create2DDesc(DrawParameters.GetRenderTargetSize(), PF_A32B32G32R32F, FClearValueBinding::None, TexCreate_None, TexCreate_ShaderResource | TexCreate_UAV, false));
+		FPooledRenderTargetDesc ComputeShaderOutputDesc(FPooledRenderTargetDesc::Create2DDesc(DrawParameters.GetRenderTargetSize(), PF_FloatRGBA, FClearValueBinding::None, TexCreate_None, TexCreate_ShaderResource | TexCreate_UAV, false));
 
 		ComputeShaderOutputDesc.DebugName = TEXT("ShaderPlugin_ComputeShaderOutput2");
 		GRenderTargetPool.FindFreeElement(RHICmdList, ComputeShaderOutputDesc, PositionOutput, TEXT("ShaderPlugin_ComputeShaderOutput2"));
 	}
 
 	FComputeShaderExample::RunComputeShader_RenderThread(RHICmdList, DrawParameters, VelocityOutput->GetRenderTargetItem().UAV, DrawParameters.VelocityRenderTarget->GetRenderTargetResource()->TextureRHI, PositionOutput->GetRenderTargetItem().UAV, DrawParameters.PositionRenderTarget->GetRenderTargetResource()->TextureRHI);
-	FPixelShaderExample::DrawToRenderTarget_RenderThread(RHICmdList, DrawParameters, VelocityOutput->GetRenderTargetItem().TargetableTexture, PositionOutput->GetRenderTargetItem().TargetableTexture);
+	//FPixelShaderExample::DrawToRenderTarget_RenderThread(RHICmdList, DrawParameters, VelocityOutput->GetRenderTargetItem().TargetableTexture, PositionOutput->GetRenderTargetItem().TargetableTexture);
+	RHICmdList.CopyTexture(VelocityOutput->GetRenderTargetItem().ShaderResourceTexture, DrawParameters.VelocityRenderTarget->GetRenderTargetResource()->TextureRHI, FRHICopyTextureInfo());
+	RHICmdList.CopyTexture(PositionOutput->GetRenderTargetItem().ShaderResourceTexture, DrawParameters.PositionRenderTarget->GetRenderTargetResource()->TextureRHI, FRHICopyTextureInfo());
 }
